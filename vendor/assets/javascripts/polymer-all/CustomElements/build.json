@@ -1,0 +1,11 @@
+[
+  "src/scope.js",
+  "src/sidetable.js",
+  "MutationObservers/MutationObserver.js",
+  "src/MutationObserver.js",
+  "src/Observer.js",
+  "src/CustomElements.js",
+  "src/HTMLElementElement.js",
+  "src/Parser.js",
+  "src/boot.js"
+]
