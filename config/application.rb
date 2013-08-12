@@ -30,6 +30,7 @@ module Microsites
 
     # require application files
     # PatriotNetwork.load!
+
   end
 end
 

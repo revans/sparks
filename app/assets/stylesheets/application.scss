@@ -4,3 +4,7 @@
 
 @import "bourbon";
 @import "neat";
+
+#hello {
+  @include button(shiny, #ff0000);
+}
