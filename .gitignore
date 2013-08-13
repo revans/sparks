@@ -1,4 +1,6 @@
 .DS_Store
 .sass-cache
-app/assets/bourbon
-app/assets/neat
+app/assets/stylesheets/bourbon
+app/assets/stylesheets/neat
+public/stylesheets
+public/javascripts

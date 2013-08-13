@@ -7,5 +7,6 @@
 @import "neat/neat";
 
 #hello {
+  width: 100%;
   @include button(shiny, #ff0000);
 }
