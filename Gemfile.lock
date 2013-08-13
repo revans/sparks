@@ -11,6 +11,9 @@ GEM
     coffee-script-source (1.6.3)
     daemons (1.1.9)
     dotenv (0.8.0)
+    em-websocket (0.5.0)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.5.3)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -28,9 +31,14 @@ GEM
     guard-coffeescript (1.3.2)
       coffee-script (>= 2.2.0)
       guard (>= 1.1.0)
+    guard-livereload (1.4.0)
+      em-websocket (>= 0.5.0)
+      guard (>= 1.8.0)
+      multi_json (~> 1.7)
     guard-sass (1.3.2)
       guard (>= 1.1.0)
       sass (>= 3.1)
+    http_parser.rb (0.5.3)
     json (1.8.0)
     listen (1.2.3)
       rb-fsevent (>= 0.9.3)
@@ -80,6 +88,7 @@ DEPENDENCIES
   coffee-script
   foreman
   guard-coffeescript
+  guard-livereload
   guard-sass
   neat
   rack
