@@ -14,16 +14,15 @@ group :production do
   # gem 'sequel_pg'
 end
 
-group :development, :test do
-  # gem 'sequel'
-  # gem 'pry'
+group :development do
   gem "sass"
   gem "coffee-script"
   gem "rack-livereload"
 
   # auto-compile
-  gem "guard-sass",           require: false
-  gem "guard-coffeescript",   require: false
+  gem "guard-sass"
+  gem "guard-coffeescript"
+  gem "guard-livereload"
 
   gem "bourbon"
   gem "neat"
@@ -32,6 +31,11 @@ group :development, :test do
   # gem "uglify"
 
   gem "rdoc"
+end
+
+group :development, :test do
+  # gem 'sequel'
+  # gem 'pry'
 end
 
 group :test do

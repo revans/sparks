@@ -22,4 +22,7 @@ end
 require "./config/application"
 require "./app/app"
 
+require 'rack-livereload'
+use Rack::LiveReload
+
 run Microsites::App.run!
