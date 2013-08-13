@@ -2,8 +2,9 @@
   *= require normalizer
 */
 
-@import "bourbon";
-@import "neat";
+@import "bourbon/bourbon";
+@import "grid-settings";
+@import "neat/neat";
 
 #hello {
   @include button(shiny, #ff0000);

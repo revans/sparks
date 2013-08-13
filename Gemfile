@@ -15,6 +15,11 @@ group :production do
 end
 
 group :development do
+  # styling
+  gem "bourbon"
+  gem "neat"
+
+  # development tools
   gem "sass"
   gem "coffee-script"
   gem "rack-livereload"
@@ -23,9 +28,6 @@ group :development do
   gem "guard-sass"
   gem "guard-coffeescript"
   gem "guard-livereload"
-
-  gem "bourbon"
-  gem "neat"
 
   # compress js
   # gem "uglify"
