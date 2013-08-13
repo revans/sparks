@@ -38,7 +38,7 @@ end
 
 group :development, :test do
   # gem 'sequel'
-  # gem 'pry'
+  gem 'pry'
 end
 
 group :test do

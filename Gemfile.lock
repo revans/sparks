@@ -91,6 +91,7 @@ DEPENDENCIES
   guard-livereload
   guard-sass
   neat
+  pry
   rack
   rack-livereload
   rake
