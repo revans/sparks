@@ -2,6 +2,7 @@ guard 'sass',         input: 'app/assets/stylesheets',    output: 'public/styles
 guard 'coffeescript', input: 'app/assets/coffeescripts',  output: 'public/javascripts'
 
 guard 'livereload' do
+  watch("app/app.rb")
   watch(%r{app/views/.+\.(erb|haml|slim)})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
