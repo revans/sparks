@@ -4,11 +4,12 @@ gem 'sinatra'
 gem "rack"
 gem 'rake'
 
+gem 'thin'
+gem 'foreman'
+
 # gem "rack-contrib"
 # gem "sinatra-contrib"
 
-gem 'thin'
-gem 'foreman'
 
 group :production do
   # gem 'sequel_pg'
