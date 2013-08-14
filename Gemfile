@@ -12,7 +12,7 @@ gem 'foreman'
 
 
 group :production do
-  # gem 'sequel_pg'
+  gem 'sequel_pg'
 end
 
 group :development do
@@ -37,11 +37,11 @@ group :development do
 end
 
 group :development, :test do
-  # gem 'sequel'
+  gem 'sequel'
   gem 'pry'
 end
 
 group :test do
-  # gem 'minitest'
-  # gem 'rack-test'
+  gem 'minitest'
+  gem 'rack-test'
 end
