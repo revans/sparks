@@ -37,7 +37,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sequel'
+  gem 'sqlite3'
   gem 'pry'
 end
 
