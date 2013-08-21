@@ -8,12 +8,14 @@ module Sparks
       new(name).app
     end
 
-    attr_reader :appname
+    attr_reader :appname, :appath
     def initialize(name)
-      @appname = name.downcase
+      @appath   = ::Pathname.new(Dir.pwd).join(name).expand_path.dirname
+      @appname  = ::Pathname.new(name).basename.to_s.downcase
     end
 
     def app
+      appath.mkpath
       build_app
     end
 
@@ -26,7 +28,7 @@ module Sparks
     end
 
     def app_root
-      ::Pathname.new(Dir.pwd).join(appname)
+      ::Pathname.new(appath).join(appname).expand_path
     end
 
     def get_binding
@@ -83,7 +85,7 @@ module Sparks
     end
 
     def create_files
-      ['Gemfile', 'Procfile', 'Rakefile', 'config.ru.erb', '.gitignore', 'app/api.rb.erb', 'config/application.rb.erb', 'config/db.yml.erb', 'app/assets/javascripts/application.coffee', 'app/assets/stylesheets/application.scss'].
+      ['Gemfile', 'Procfile', 'Rakefile', 'config.ru.erb', '.env', '.gitignore', 'app/api.rb.erb', 'config/application.rb.erb', 'config/db.yml.erb', 'app/assets/javascripts/application.coffee', 'app/assets/stylesheets/application.scss'].
       each do |file|
         write_file(file)
       end

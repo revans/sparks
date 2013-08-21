@@ -1,9 +1,4 @@
 require 'test_helper'
-require './lib/sparks'
-
-def set_env(env)
-  ENV['RACK_ENV'] = env
-end
 
 class SparksTest < Minitest::Test
   def mocked_root
@@ -38,12 +33,12 @@ class SparksTest < Minitest::Test
     assert Sparks.reload!
   end
 
-  # def test_env
-  #   assert_equal 'test', Sparks.env
+  def test_env
+    assert_equal 'development', Sparks.env
 
-  #   Sparks.env = 'test'
-  #   assert_equal 'test', Sparks.env
-  # end
+    Sparks.env = 'test'
+    assert_equal 'test', Sparks.env
+  end
 
   def test_db_confg
     path = mocked_root + "/config/db.yml"

@@ -1,0 +1,4 @@
+require './config/application'
+
+# Load Rake tasks
+Dir.glob('lib/tasks/**/*.rake').each { |rakefile| import rakefile }

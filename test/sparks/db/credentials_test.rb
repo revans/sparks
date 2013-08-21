@@ -1,5 +1,5 @@
 require 'test_helper'
-require "./lib/db/credentials"
+require "./lib/sparks/db/credentials"
 
 module Sparks::DB
   class CredentialsTest < Minitest::Test

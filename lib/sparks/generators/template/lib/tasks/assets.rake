@@ -1,7 +1,3 @@
-require './config/application'
-
-# Load Rake tasks
-Dir.glob('lib/tasks/**/*.rake').each { |rakefile| import rakefile }
 
 namespace :assets do
   desc "Install Bourbon, Neat, and generate the Grid Settings Stylesheet"

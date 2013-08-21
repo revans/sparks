@@ -2,11 +2,20 @@ require 'pathname'
 require 'json'
 require 'yaml'
 
-require_relative "db/credentials"
-require_relative "generators"
+require_relative "sparks/env"
+require_relative "sparks/db/credentials"
+require_relative "sparks/generators"
 
 module Sparks
   extend self
+
+  def env
+    ENV['RACK_ENV'] ||= 'development'
+  end
+
+  def env=(val = 'development')
+    ENV['RACK_ENV'] = val
+  end
 
   # Returns the path to the root directory
   #
