@@ -10,10 +10,14 @@ require_relative "sparks/version"
 module Sparks
   extend self
 
+  # ENV reader
+  #
   def env
     ENV['RACK_ENV'] ||= 'development'
   end
 
+  # ENV writer
+  #
   def env=(val = 'development')
     ENV['RACK_ENV'] = val
   end
@@ -24,29 +28,41 @@ module Sparks
     ::Pathname.new(__dir__).join("../..").expand_path
   end
 
+  # Path to where the application logic exists
+  #
+  def app_path
+    root.join("app")
+  end
+
   # Returns the path to the public folder
   #
-  # NOTE: should deprecate this in favor of the developer
-  #       setting this themselves
-  #
   def public_file
-    root.join("public").to_s
+    public_path.to_s
   end
 
   # Returns the path to the view files
   #
-  # NOTE: should deprecate this in favor of the developer
-  #       setting this themselves
-  #
   def view_files
-    root.join("app/views").to_s
+    view_path.to_s
+  end
+
+  # Public Path
+  #
+  def public_path
+    root.join("public")
+  end
+
+  # View Path
+  #
+  def view_path
+    app_path.join("views")
   end
 
   # Returns an array to all the application logic files (user created)
   #
   # ==== Example
   #
-  #   When creating a new applicaton with the PatriotNetwork Framework,
+  #   When creating a new applicaton with the Sparks Framework,
   #   you can create whatever directories make sense. The only requirement
   #   for that is that those files live within the app/ directory.
   #
@@ -62,32 +78,30 @@ module Sparks
 
   # Location to the config directory
   #
-  def config
+  def config_path
     root.join('config')
   end
 
-  # Database Yaml Configuration file
+  # Returns the path to the database configuration file.
   #
-  def db_config
-    root.join('config/db.yml')
+  # ==== Returns
+  #
+  #   * String
+  #
+  def database_config
+    config_path.join("db.yml")
   end
 
-  # Returns the path to the database configuration file. Specifically
-  # being used for setting up the connection to sqlite3
+  # Path to the user set assets
   #
-  # Returns a String
+  def assets_path
+    app_path.join("assets")
+  end
+
+  # Path to the vendored 3rd party assets
   #
-  # ==== Attributes
-  #
-  #   * +db_file+ - The name of the database specified by the developer.
-  #
-  def database_path(db_file)
-      # config.
-      # join(db_file).
-      db_config.
-      expand_path.
-      to_s.
-      sub(/^\//, '')
+  def vendor_assets_path
+    root.join("vendor/assets")
   end
 
   # Loads all the application files
@@ -117,7 +131,7 @@ module Sparks
   #
   def build
     [
-      root.join("app/app.rb").to_s,
+      root.join("app/api.rb").to_s,
       app_logic.to_s
     ]
   end

@@ -1,5 +1,9 @@
 require 'test_helper'
 
+def set_env_to(env)
+  ENV['RACK_ENV'] = env
+end
+
 class SparksTest < Minitest::Test
   def mocked_root
     ::File.expand_path("../../", __dir__)
@@ -34,20 +38,47 @@ class SparksTest < Minitest::Test
   end
 
   def test_env
-    ENV["RACK_ENV"] = "development"
+    set_env_to "development"
     assert_equal 'development', Sparks.env
 
     Sparks.env = 'test'
     assert_equal 'test', Sparks.env
   end
 
-  def test_db_confg
+  def test_database_config
     path = mocked_root + "/config/db.yml"
-    assert_equal path, Sparks.db_config.to_s
+    assert_equal path, Sparks.database_config.to_s
   end
 
   def test_config
     path = mocked_root + "/config"
-    assert_equal path, Sparks.config.to_s
+    assert_equal path, Sparks.config_path.to_s
+  end
+
+  def test_public_file
+    path = mocked_root + "/public"
+    assert_equal path, Sparks.public_file
+  end
+
+  def test_public_path
+    path = mocked_root + "/public"
+    assert_equal path, Sparks.public_path.to_s
+  end
+
+  def test_view_files
+    path = mocked_root + "/app/views"
+    assert_equal path, Sparks.view_files
+  end
+
+  def test_view_path
+    path = mocked_root + "/app/views"
+    assert_equal path, Sparks.view_path.to_s
+  end
+
+  def test_build
+    dirs = Sparks.build
+
+    assert_match "app/api.rb",      dirs.first
+    assert_match "app/**/**/*.rb",  dirs.last
   end
 end

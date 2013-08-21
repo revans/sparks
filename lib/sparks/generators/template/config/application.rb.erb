@@ -7,8 +7,8 @@ module <%= @appname.capitalize %>
 
     # general default configuration
     configure do
-      set :public_folder,     "./public"
-      set :views,             "./app/views"
+      set :public_folder,     Sparks.public_file
+      set :views,             Sparks.view_files
       set :show_exceptions,   false
       # set :server,            'thin'
       set :connections,       []
@@ -23,13 +23,13 @@ module <%= @appname.capitalize %>
     end
 
     # connection to sql
-    # DB, Sequel::Model.db = PatriotNetwork.db_connect!
+    # DB, Sequel::Model.db = Sparks.db_connect!
 
     # Sequel Extensions
     # Sequel.extension :migration, :core_extensions
 
     # require application files
-    # PatriotNetwork.load!
+    # Sparks.load!
 
   end
 end

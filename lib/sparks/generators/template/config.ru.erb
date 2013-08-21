@@ -3,26 +3,14 @@ require 'pathname'
 require 'logger'
 require 'bundler'
 Bundler.require(:default, ENV["RACK_ENV"])
-
-module <%= module_classname %>
-  extend self
-  def root
-    ::Pathname.new(__FILE__).join("..").expand_path
-  end
-
-  def assets_path
-    root.join("assets")
-  end
-
-  def vendor_assets_path
-    root.join("vendor/assets")
-  end
-end
+Bundler.require(:default, Sparks.env)
 
 require "./config/application"
 require "./app/api"
 
-require 'rack-livereload'
-use Rack::LiveReload
+if Sparks.development?
+  require 'rack-livereload'
+  use Rack::LiveReload
+end
 
 run <%= module_classname %>::Api.run!
