@@ -34,6 +34,7 @@ class SparksTest < Minitest::Test
   end
 
   def test_env
+    ENV["RACK_ENV"] = "development"
     assert_equal 'development', Sparks.env
 
     Sparks.env = 'test'

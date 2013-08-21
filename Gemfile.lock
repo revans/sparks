@@ -1,10 +1,18 @@
+PATH
+  remote: .
+  specs:
+    sparks (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.0.6)
+    rake (10.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   minitest
+  rake
+  sparks!

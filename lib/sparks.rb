@@ -5,6 +5,7 @@ require 'yaml'
 require_relative "sparks/env"
 require_relative "sparks/db/credentials"
 require_relative "sparks/generators"
+require_relative "sparks/version"
 
 module Sparks
   extend self
