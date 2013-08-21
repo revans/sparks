@@ -35,60 +35,64 @@ module Sparks
       binding
     end
 
-    # private
-
     def build_app
       create_directories
-      create_app_assets
-      create_assets
-      create_views
-      create_helpers
-      create_files
-      copy_files
       gitkeep_empty_dirs
+      write_files
+      copy_files
     end
 
     def create_directories
-      %w|app config db doc lib public test|.each { |dir| create_directory(dir) }
+      %w|app/views
+         app/helpers
+         app/assets/javascripts
+         app/assets/stylesheets
+         app/assets/images
+         app/assets/fonts
+         app/assets/templates
+         config
+         db
+         doc
+         lib/tasks
+         public
+         test
+         vendor/assets/stylesheets
+         vendor/assets/javascripts
+         vendor/assets/images
+         vendor/assets/fonts|.
+      each { |dir| create_directory(dir) }
     end
 
     def gitkeep_empty_dirs
-      %w|db lib public test vendor/assets/javascripts vendor/assets/stylesheets vendor/assets/images|.each do |dir|
-        add_gitkeep(dir)
-      end
+      %w|app/views
+         app/helpers
+         db
+         test
+         vendor/assets/javascripts
+         vendor/assets/stylesheets
+         vendor/assets/images|.
+      each { |dir| add_gitkeep(dir) }
     end
 
-    def create_app_assets
-      %w|javascripts stylesheets images fonts templates|.each do |dir|
-        asset = "app/assets/#{dir}"
-        create_directory(asset)
-        add_gitkeep(asset)
-      end
-    end
-
-    def create_assets
-      %w|javascripts stylesheets images fonts|.each do |dir|
-        asset = "vendor/assets/#{dir}"
-        create_directory(asset)
-        add_gitkeep(asset)
-      end
-    end
-
-    def create_views
-      create_directory("app/views")
-      add_gitkeep("app/views")
-    end
-
-    def create_helpers
-      create_directory("app/helpers")
-      add_gitkeep("app/helpers")
-    end
-
-    def create_files
-      ['Gemfile', 'Procfile', 'Rakefile', 'config.ru.erb', '.env', '.gitignore', 'app/api.rb.erb', 'config/application.rb.erb', 'config/db.yml.erb', 'app/assets/javascripts/application.coffee', 'app/assets/stylesheets/application.scss'].
-      each do |file|
-        write_file(file)
-      end
+    def write_files
+      %w|Gemfile
+         Procfile
+         Rakefile
+         config.ru.erb
+         .env
+         .gitignore
+         app/api.rb.erb
+         config/application.rb.erb
+         config/db.yml.erb
+         app/assets/javascripts/application.coffee
+         app/assets/stylesheets/application.scss
+         public/humans.txt
+         public/robots.txt
+         lib/tasks/assets.rake
+         lib/tasks/db.rake
+         lib/tasks/test.rake
+        |.
+      each { |file| write_file(file) }
     end
 
     def copy_files

@@ -45,9 +45,9 @@ class GeneratorsTest < Minitest::Test
       assert generator.app
       path = generator.app_root
 
-      %w|Gemfile Procfile Rakefile config.ru .env .gitignore app/api.rb config/application.rb config/db.yml db/.gitkeep lib/.gitkeep public/.gitkeep test/.gitkeep vendor/assets/javascripts/.gitkeep vendor/assets/stylesheets/.gitkeep vendor/assets/images/.gitkeep|.
+      %w|Gemfile Procfile Rakefile config.ru .env .gitignore app/api.rb config/application.rb config/db.yml db/.gitkeep test/.gitkeep vendor/assets/javascripts/.gitkeep vendor/assets/stylesheets/.gitkeep vendor/assets/images/.gitkeep lib/tasks/assets.rake lib/tasks/db.rake lib/tasks/test.rake|.
       each do |file|
-        assert exists?( path.join(file).to_s )
+        assert exists?( path.join(file).to_s ), "#{file} does not exists."
       end
 
     end
