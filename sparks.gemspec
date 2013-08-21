@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["robert@codewranglers.org"]
   gem.description   = "A lightweight framework on top of Sinatra. Can be used for applications as well as rapid prototyping."
   gem.summary       = "A lightweight framework on top of Sinatra."
-  gem.homepage      = ""
+  gem.homepage      = "http://www.codewranglers.org"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
