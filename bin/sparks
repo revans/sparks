@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require "./lib/sparks"
-Sparks::Generators.generate_app(ARGV.first).build
+Sparks::Generators.generate(ARGV.first)
