@@ -4,7 +4,7 @@ require 'logger'
 require 'bundler'
 Bundler.require(:default, ENV["RACK_ENV"])
 
-module <%= @appname.capitalize %>
+module <%= module_classname %>
   extend self
   def root
     ::Pathname.new(__FILE__).join("..").expand_path
@@ -25,4 +25,4 @@ require "./app/api"
 require 'rack-livereload'
 use Rack::LiveReload
 
-run <%= @name.capitalize %>::Api.run!
+run <%= module_classname %>::Api.run!

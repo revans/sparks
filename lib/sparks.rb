@@ -3,25 +3,22 @@ require 'fileutils'
 require 'erb'
 
 module Sparks
-  module Generators
-    extend self
-
-    def generate_app(name)
-      @appname = name
-      self
+  class Generators
+    def self.generate(name)
+      new(name).app
     end
 
-    def build
+    attr_reader :appname
+    def initialize(name)
+      @appname = name.downcase
+    end
+
+    def app
       build_app
-      self
-    end
-
-    def appname
-      @appname.downcase
     end
 
     def module_classname
-      @appname.capitalize
+      appname.capitalize
     end
 
     def template_root
@@ -32,7 +29,11 @@ module Sparks
       ::Pathname.new(Dir.pwd).join(appname)
     end
 
-    private
+    def get_binding
+      binding
+    end
+
+    # private
 
     def build_app
       create_directories
@@ -42,15 +43,22 @@ module Sparks
       create_helpers
       create_files
       copy_files
+      gitkeep_empty_dirs
     end
 
     def create_directories
       %w|app config db doc lib public test|.each { |dir| create_directory(dir) }
     end
 
+    def gitkeep_empty_dirs
+      %w|db lib public test vendor/assets/javascripts vendor/assets/stylesheets vendor/assets/images|.each do |dir|
+        add_gitkeep(dir)
+      end
+    end
+
     def create_app_assets
       %w|javascripts stylesheets images fonts templates|.each do |dir|
-        assert = "app/assets/#{dir}"
+        asset = "app/assets/#{dir}"
         create_directory(asset)
         add_gitkeep(asset)
       end
@@ -82,7 +90,7 @@ module Sparks
     end
 
     def copy_files
-      ['app/views/layout.html.erb'].each do |file|
+      ['app/views/layout.erb'].each do |file|
         copy_file(file)
       end
     end
@@ -109,7 +117,7 @@ module Sparks
     end
 
     def read_erb(content)
-      ::ERB.new(content).result(binding)
+      ::ERB.new(content).result(get_binding)
     end
 
     def format_erb_filename(file)
