@@ -1,56 +1,123 @@
 require 'pathname'
-require 'erb'
 require 'fileutils'
+require 'erb'
 
 module Sparks
-  class Generate
+  module Generators
+    extend self
 
-    def self.app(name, path)
-      generator = Generator.new(name, path)
-      generator.generate_app
-      generator.copy_app
-      # TODO: iterate over the files necessary
+    def generate_app(name)
+      @appname = name
+      self
     end
 
-  end
-
-  class Generator
-    attr_reader :name, :path, :template_path
-
-    def initialize(name, path)
-      @name, @path    = name, ::Pathname.new(path).expand_path.join(name)
-      @template_path  = ::Pathname.new(__dir__).expand_path.join("template")
+    def build
+      build_app
+      self
     end
 
-    def generate_app
-      path.mkpath
+    def appname
+      @appname.downcase
     end
 
-    def copy_app
-      ::FileUtils.cp_r(template_path.join("/"), path, noop: true, verbose: true)
+    def module_classname
+      @appname.capitalize
     end
 
-    # TODO: path...
-    def copy_file(filename)
-      ::FileUtils.cp_r(template_path.join(filename), path.join(filename), noop: true, verbose: true)
+    def template_root
+      ::Pathname.new(__dir__).join('generators/template')
     end
 
-    # TODO: path...
-    def generate_file(filename)
-      content = erb_render( read_file(filename) )
-      ::File.open(filename, "w+") { |file| file.puts content }
+    def app_root
+      ::Pathname.new(Dir.pwd).join(appname)
     end
 
-    def render_erb(content)
-      ::ERB.new(content).result
+    private
+
+    def build_app
+      create_directories
+      create_app_assets
+      create_assets
+      create_views
+      create_helpers
+      create_files
+      copy_files
     end
 
-    def read_file(filename)
-      template_path.join(filename).read
+    def create_directories
+      %w|app config db doc lib public test|.each { |dir| create_directory(dir) }
     end
 
-    def report(msg)
-      $stderr.puts "--> #{msg}"
+    def create_app_assets
+      %w|javascripts stylesheets images fonts templates|.each do |dir|
+        assert = "app/assets/#{dir}"
+        create_directory(asset)
+        add_gitkeep(asset)
+      end
+    end
+
+    def create_assets
+      %w|javascripts stylesheets images fonts|.each do |dir|
+        asset = "vendor/assets/#{dir}"
+        create_directory(asset)
+        add_gitkeep(asset)
+      end
+    end
+
+    def create_views
+      create_directory("app/views")
+      add_gitkeep("app/views")
+    end
+
+    def create_helpers
+      create_directory("app/helpers")
+      add_gitkeep("app/helpers")
+    end
+
+    def create_files
+      ['Gemfile', 'Procfile', 'Rakefile', 'config.ru.erb', '.gitignore', 'app/api.rb.erb', 'config/application.rb.erb', 'config/db.yml.erb', 'app/assets/javascripts/application.coffee', 'app/assets/stylesheets/application.scss'].
+      each do |file|
+        write_file(file)
+      end
+    end
+
+    def copy_files
+      ['app/views/layout.html.erb'].each do |file|
+        copy_file(file)
+      end
+    end
+
+    def copy_file(file)
+      contents = template_root.join(file).read
+      ::File.open( app_root.join(file).to_s, 'w+') do |f|
+        f.puts contents
+      end
+    end
+
+    ###################################################
+    def create_directory(dir)
+      ::FileUtils.mkdir_p( app_root.join(dir).to_s )
+    end
+
+    def write_file(file)
+      filename = format_erb_filename(file)
+      content  = read_erb( template_root.join(file).read )
+
+      ::File.open(app_root.join(filename).to_s, 'w+') do |f|
+        f.puts content
+      end
+    end
+
+    def read_erb(content)
+      ::ERB.new(content).result(binding)
+    end
+
+    def format_erb_filename(file)
+      file.to_s.split('.erb').first
+    end
+
+    def add_gitkeep(path)
+      ::FileUtils.touch( app_root.join(path).join('.gitkeep').to_s )
     end
 
   end

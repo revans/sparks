@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "./lib/sparks"
+
+options = ARGV.delete_if { |arg| arg.start_with?("--") }
+
+Sparks::Generators.generate_app(options.first)

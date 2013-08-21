@@ -1,0 +1,5 @@
+# Sparks
+
+[![Build Status](https://travis-ci.org/revans/sparks.png)](https://travis-ci.org/revans/sparks)
+
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/revans/sparks)

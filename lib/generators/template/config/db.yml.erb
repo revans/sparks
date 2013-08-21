@@ -1,0 +1,35 @@
+credentials: &cred
+  user:
+  password:
+
+options: &opts
+  adapter: sqlite3
+  max:
+
+development:
+  <<: *cred
+  <<: *opts
+  host:
+  port:
+  database: db/<%= @appname %>_dev.db
+
+test:
+  <<: *cred
+  <<: *opts
+  host:
+  port:
+  database: db/<%= @appname %>_test.db
+
+# staging:
+#   <<: *cred
+#   <<: *opts
+#   host:
+#   port:
+#   database: db/<%= @appname %>_staging.db
+
+# production:
+#   <<: *cred
+#   <<: *opts
+#   host:
+#   port:
+#   database: db/<%= @appname %>.db

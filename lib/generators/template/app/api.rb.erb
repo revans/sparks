@@ -1,0 +1,8 @@
+
+module <%= @appname.capitalize %>
+  class Api < Sinatra::Base
+    get "/" do
+      "Hello #{@appname.capitalize}"
+    end
+  end
+end
