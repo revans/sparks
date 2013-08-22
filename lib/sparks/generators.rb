@@ -76,6 +76,7 @@ module Sparks
 
     def write_files
       %w|Gemfile
+         Guardfile
          Procfile
          Rakefile
          config.ru.erb
