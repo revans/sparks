@@ -4,6 +4,12 @@ module Sparks
     class LineError < SyntaxError; end
 
     %w|development? test? staging? production?|.each do |environment|
+      define_method(environment) do
+        environment.sub('?', '').to_s == Sparks.env
+      end
+    end
+
+    %w|development? test? staging? production?|.each do |environment|
       self.class.send(:define_method, environment) do
         environment.sub('?', '').to_s == Sparks.env
       end
