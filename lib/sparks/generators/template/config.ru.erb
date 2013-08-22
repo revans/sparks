@@ -1,16 +1,19 @@
-ENV["RACK_ENV"] ||= "development"
-require 'pathname'
-require 'logger'
-require 'bundler'
-Bundler.require(:default, ENV["RACK_ENV"])
-Bundler.require(:default, Sparks.env)
-
 require "./config/application"
 require "./app/api"
 
-if Sparks.development?
-  require 'rack-livereload'
-  use Rack::LiveReload
-end
+# If you want to do AutoLoading of Files, when
+# those files change using Guard and Livereload,
+# then uncomment below.
+#
+# The Procfile and Guardfile are configured to
+# to do auto-reloading of SASS, CoffeeScript,
+# CSS, JavaScript, and HTML files.
+#
+# This makes it really nice to do rapid prototyping.
+#
+# if Sparks.development?
+#   require 'rack-livereload'
+#   use Rack::LiveReload
+# end
 
 run <%= module_classname %>::Api.run!

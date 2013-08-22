@@ -1,31 +1,66 @@
-require 'yaml'
 $stdout.sync = true
 
-# can require framework things here
-# sprockets here?
+ENV["RACK_ENV"] ||= "development"
+require 'pathname'
+require 'logger'
+require 'yaml'
+
+require 'bundler'
+Bundler.require(:default, ENV["RACK_ENV"])
+
 module <%= @appname.capitalize %>
   class Api < Sinatra::Base
+
+    # Before Filter for handling HTTP Cache-Control
+    # before do
+    #   cache_control :public, :must_revalidate, max_age: 60
+    #   expires 500,  :public, :must_revalidate
+    # end
 
     # general default configuration
     configure do
       set :public_folder,     Sparks.public_file
       set :views,             Sparks.view_files
       set :show_exceptions,   false
-      # set :server,            'thin'
       set :connections,       []
+      # set :server,            'thin'
 
       # mime_type :plain, 'text/plain'
       # enable :sessions
+      # enable :logging
+      # enable :logging, :dump_errors, :raise_errors
     end
 
-    # Error Handling
+    ## Environment Specific Configuration
+    #
+    configure :development do
+      # enable :sessions, :logging, :dump_errors, :raise_errors
+      enable :show_exceptions
+    end
+
+    # configure :test         do; end
+    # configure :staging      do; end
+
+    # configure :production do
+    #   require 'rack/cache'
+    #   use Rack::Cache
+    # end
+
+    # HTTP Error Handling
     not_found do
       # do something, return a 404 page
     end
 
+    # Application Error Handling
+    error do
+      # Log an Error
+    end
+
+    # require application files
+    # Sparks.load!
+
     # connection to sql
-    # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(
-    # ::YAML::load("config/db.yml")[Sparks.env])
+    # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(Sparks.load_database_config)
 
     # Load Sequel plugins
     # Sequel::Model.plugin :touch # defaults to updated_at
@@ -36,9 +71,6 @@ module <%= @appname.capitalize %>
     # Sequel Settings
     # Sequel.application_timezone = :utc
     # Sequel.database_timezone    = :utc
-
-    # require application files
-    # Sparks.load!
 
   end
 end
@@ -63,17 +95,3 @@ end
 #
 # load files
 # Dir.glob('./app/{routes,models}/*.rb').each { |file| require file }
-
-# Load an environment and include the environments setttings.
-# We should allow sharing of settings between all environments.
-#
-# if production
-#   require 'rack/cache'
-#   use Rack::Cache
-# elsif test
-# else
-#  auto-reload with shotgun or something
-#  no caching
-# end
-
-# Setup database if there is one
