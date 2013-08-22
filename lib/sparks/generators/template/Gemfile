@@ -6,7 +6,7 @@ gem 'rake'
 
 gem 'thin'
 gem 'foreman'
-gem 'sparks'
+gem 'sparks', github: "revans/sparks", branch: "master"
 
 # gem "rack-contrib"
 # gem "sinatra-contrib"
@@ -43,6 +43,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest'
-  gem 'rack-test'
+  gem 'minitest',   require: false
+  gem 'rack-test',  require: false
 end
