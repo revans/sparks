@@ -1,3 +1,4 @@
+require 'yaml'
 $stdout.sync = true
 
 # can require framework things here
@@ -23,10 +24,18 @@ module <%= @appname.capitalize %>
     end
 
     # connection to sql
-    # DB, Sequel::Model.db = Sparks.db_connect!
+    # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(
+    # ::YAML::load("config/db.yml")[Sparks.env])
+
+    # Load Sequel plugins
+    # Sequel::Model.plugin :touch # defaults to updated_at
 
     # Sequel Extensions
-    # Sequel.extension :migration, :core_extensions
+    # Sequel.extension :migration, :core_extensions, :inflector
+
+    # Sequel Settings
+    # Sequel.application_timezone = :utc
+    # Sequel.database_timezone    = :utc
 
     # require application files
     # Sparks.load!

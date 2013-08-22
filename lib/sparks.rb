@@ -123,6 +123,13 @@ module Sparks
     ::YAML.load(db_config.read)
   end
 
+  # Load the Database config for the current
+  # environment.
+  #
+  def load_database_config
+    read_db_yaml_file[Sparks.env]
+  end
+
   # Builds an array of the files that will be loaded
   #
   # ==== Returns

@@ -146,7 +146,6 @@ module Sparks
       #
       def format_database_for_adapter
         @db ||= if adapter == 'sqlite3'
-          # database_path(database)
           database
         else
           "/#{database}"
