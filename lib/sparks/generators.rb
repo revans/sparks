@@ -97,7 +97,10 @@ module Sparks
     end
 
     def copy_files
-      ['app/views/layout.erb'].each do |file|
+      %w|app/views/layout.erb
+         test/test_helper.rb
+        |.
+      each do |file|
         copy_file(file)
       end
     end
