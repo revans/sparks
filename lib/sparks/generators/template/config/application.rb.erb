@@ -9,69 +9,76 @@ require 'bundler'
 Bundler.require(:default, ENV["RACK_ENV"])
 
 module <%= @appname.capitalize %>
-  class Api < Sinatra::Base
+  module Configuration
+    def self.included(app)
 
-    # Before Filter for handling HTTP Cache-Control
-    # before do
-    #   cache_control :public, :must_revalidate, max_age: 60
-    #   expires 500,  :public, :must_revalidate
-    # end
+      # Before Filter for handling HTTP Cache-Control
+      # app.before do
+      #   app.cache_control :public, :must_revalidate, max_age: 60
+      #   app.expires 500,  :public, :must_revalidate
+      # end
 
-    # general default configuration
-    configure do
-      set :public_folder,     Sparks.public_file
-      set :views,             Sparks.view_files
-      set :show_exceptions,   false
-      set :connections,       []
-      # set :server,            'thin'
+      # general default configuration
+      app.configure do
+        app.set :public_folder,     Sparks.public_file
+        app.set :views,             Sparks.view_files
+        app.set :show_exceptions,   false
+        app.set :connections,       []
+        # app.set :server,            'thin'
 
-      # mime_type :plain, 'text/plain'
-      # enable :sessions
-      # enable :logging
-      # enable :logging, :dump_errors, :raise_errors
+        # app.mime_type :plain, 'text/plain'
+        # app.enable :sessions
+        # app.enable :logging
+        # app.enable :logging, :dump_errors, :raise_errors
+      end
+
+      ## Environment Specific Configuration
+      #
+      app.configure :development do
+        # app.enable :sessions, :logging, :dump_errors, :raise_errors
+        app.enable :show_exceptions
+      end
+
+      # app.configure :test         do; end
+      # app.configure :staging      do; end
+
+      # app.configure :production do
+      #   require 'rack/cache'
+      #   use Rack::Cache
+      # end
+
+      # 404 Error Handling
+      app.not_found do
+        # do something, return a 404 page
+      end
+
+      # Application Error Handling
+      #
+      # Can also do:
+      #
+      #   * app.error 405...510 do;end
+      #
+      app.error do
+        # Log an Error to a File or STDOUT/STDERR
+        # "Sorry there was a nasty error - #{env['sinatra.error'].name}"
+      end
+
+      # require application files
+      # Sparks.load!
+
+      # connection to sql
+      # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(Sparks.load_database_config)
+
+      # Load Sequel plugins
+      # Sequel::Model.plugin :touch # defaults to updated_at
+
+      # Sequel Extensions
+      # Sequel.extension :migration, :core_extensions, :inflector
+
+      # Sequel Settings
+      # Sequel.application_timezone = :utc
+      # Sequel.database_timezone    = :utc
     end
-
-    ## Environment Specific Configuration
-    #
-    configure :development do
-      # enable :sessions, :logging, :dump_errors, :raise_errors
-      enable :show_exceptions
-    end
-
-    # configure :test         do; end
-    # configure :staging      do; end
-
-    # configure :production do
-    #   require 'rack/cache'
-    #   use Rack::Cache
-    # end
-
-    # HTTP Error Handling
-    not_found do
-      # do something, return a 404 page
-    end
-
-    # Application Error Handling
-    error do
-      # Log an Error
-    end
-
-    # require application files
-    # Sparks.load!
-
-    # connection to sql
-    # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(Sparks.load_database_config)
-
-    # Load Sequel plugins
-    # Sequel::Model.plugin :touch # defaults to updated_at
-
-    # Sequel Extensions
-    # Sequel.extension :migration, :core_extensions, :inflector
-
-    # Sequel Settings
-    # Sequel.application_timezone = :utc
-    # Sequel.database_timezone    = :utc
-
   end
 end
 
