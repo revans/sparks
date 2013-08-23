@@ -1,9 +1,11 @@
 
-<%# module <%= @appname.capitalize %1> %>
 module <%= module_classname %>
   class Api < Sinatra::Base
+    include Configuration
+
     get "/" do
       "Hello <%= module_classname%>"
     end
+
   end
 end

@@ -7,6 +7,14 @@ require_relative "sparks/db/credentials"
 require_relative "sparks/generators"
 require_relative "sparks/version"
 
+## TODO: Possibly add these:
+#
+# Include Rack Security apps
+# Include Rack Caching
+#
+# Include Rack CoffeeScript
+# Include Rack Sass
+
 module Sparks
   extend self
 

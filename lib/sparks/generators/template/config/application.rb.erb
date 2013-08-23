@@ -20,6 +20,7 @@ module <%= @appname.capitalize %>
 
       # general default configuration
       app.configure do
+        app.set :root,              Sparks.root
         app.set :public_folder,     Sparks.public_file
         app.set :views,             Sparks.view_files
         app.set :show_exceptions,   false
@@ -27,9 +28,7 @@ module <%= @appname.capitalize %>
         # app.set :server,            'thin'
 
         # app.mime_type :plain, 'text/plain'
-        # app.enable :sessions
-        # app.enable :logging
-        # app.enable :logging, :dump_errors, :raise_errors
+        # app.enable :sessions, :logging, :dump_errors, :raise_errors
       end
 
       ## Environment Specific Configuration
@@ -81,24 +80,3 @@ module <%= @appname.capitalize %>
     end
   end
 end
-
-## Application.rb
-#
-# This should be totally configurable to set your application and directory
-# structure to best reflect the domain of the application in which you are
-# building.
-#
-## Necessary
-#
-# Include Rack Security apps
-# Include Rack Caching
-#
-## Optional
-#
-# Include Rack CoffeeScript
-# Include Rack Sass
-
-## For this app, this is how I'll set it up
-#
-# load files
-# Dir.glob('./app/{routes,models}/*.rb').each { |file| require file }
