@@ -148,7 +148,18 @@ module Sparks
   def build
     [
       # root.join("app/api.rb").to_s,
+      # root.join("apps/apps.rb").to_s,
       app_logic.to_s
     ]
   end
 end
+
+
+# What do I want the directory structure to look like
+# for multiple apps?
+#
+# apps/apps.rb
+# apps/api/app.rb
+# apps/api/views
+# apps/registration/app.rb
+# apps/registration/views

@@ -45,10 +45,14 @@ class GeneratorsTest < Minitest::Test
       assert generator.app
       path = generator.app_root
 
+      # goes through the array checking to make sure each file
+      # has been generated
       %w|Gemfile Procfile Rakefile config.ru .env .gitignore apps/api.rb config/application.rb config/db.yml db/.gitkeep test/.gitkeep vendor/assets/javascripts/.gitkeep vendor/assets/stylesheets/.gitkeep vendor/assets/images/.gitkeep lib/tasks/assets.rake lib/tasks/db.rake lib/tasks/test.rake Guardfile|.
       each do |file|
         assert exists?( path.join(file).to_s ), "#{file} does not exists."
       end
+
+      # TODO: make sure the empty folders with gitkeep exist
 
     end
 

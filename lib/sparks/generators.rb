@@ -42,6 +42,9 @@ module Sparks
       copy_files
     end
 
+    # TODO: All the "apps" stuff will need to be moved to a new
+    #       method so I can do this: apps/#{appname}/views
+    #
     def create_directories
       %w|apps/views
          apps/helpers
