@@ -39,7 +39,7 @@ module Sparks
   # Path to where the application logic exists
   #
   def app_path
-    root.join("app")
+    root.join("apps")
   end
 
   # Returns the path to the public folder
@@ -75,7 +75,8 @@ module Sparks
   #   for that is that those files live within the app/ directory.
   #
   def app_logic
-    root.join("app/**/**/*.rb")
+    # root.join("app/**/**/*.rb")
+    app_path.join("**/**/*.rb")
   end
 
   # Returns an array to all the rake tasks (user created)
@@ -146,7 +147,7 @@ module Sparks
   #
   def build
     [
-      root.join("app/api.rb").to_s,
+      # root.join("app/api.rb").to_s,
       app_logic.to_s
     ]
   end

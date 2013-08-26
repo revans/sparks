@@ -10,7 +10,7 @@ class SparksTest < Minitest::Test
   end
 
   def app_logic
-    mocked_root + "/app/**/**/*.rb"
+    mocked_root + "/apps/**/**/*.rb"
   end
 
   def test_root
@@ -66,19 +66,19 @@ class SparksTest < Minitest::Test
   end
 
   def test_view_files
-    path = mocked_root + "/app/views"
+    path = mocked_root + "/apps/views"
     assert_equal path, Sparks.view_files
   end
 
   def test_view_path
-    path = mocked_root + "/app/views"
+    path = mocked_root + "/apps/views"
     assert_equal path, Sparks.view_path.to_s
   end
 
   def test_build
     dirs = Sparks.build
 
-    assert_match "app/api.rb",      dirs.first
-    assert_match "app/**/**/*.rb",  dirs.last
+    # assert_match "app/api.rb",      dirs.first
+    assert_match "apps/**/**/*.rb",  dirs.last
   end
 end

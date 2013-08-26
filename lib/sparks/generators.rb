@@ -43,13 +43,13 @@ module Sparks
     end
 
     def create_directories
-      %w|app/views
-         app/helpers
-         app/assets/javascripts
-         app/assets/stylesheets
-         app/assets/images
-         app/assets/fonts
-         app/assets/templates
+      %w|apps/views
+         apps/helpers
+         apps/assets/javascripts
+         apps/assets/stylesheets
+         apps/assets/images
+         apps/assets/fonts
+         apps/assets/templates
          config
          db
          doc
@@ -64,8 +64,8 @@ module Sparks
     end
 
     def gitkeep_empty_dirs
-      %w|app/views
-         app/helpers
+      %w|apps/views
+         apps/helpers
          db
          test
          vendor/assets/javascripts
@@ -82,11 +82,11 @@ module Sparks
          config.ru.erb
          .env
          .gitignore
-         app/api.rb.erb
+         apps/api.rb.erb
          config/application.rb.erb
          config/db.yml.erb
-         app/assets/javascripts/application.coffee
-         app/assets/stylesheets/application.scss
+         apps/assets/javascripts/application.coffee
+         apps/assets/stylesheets/application.scss
          public/humans.txt
          public/robots.txt
          lib/tasks/assets.rake
@@ -97,7 +97,7 @@ module Sparks
     end
 
     def copy_files
-      %w|app/views/layout.erb
+      %w|apps/views/layout.erb
          test/test_helper.rb
         |.
       each { |file| copy_file(file) }
