@@ -4,7 +4,7 @@ module <%= module_classname %>
     include Configuration
 
     # Views should be set on a per application basis
-    set :views, Sparks.root.join("apps/views")
+    set :views, "./apps/views"
 
     get "/" do
       "Hello <%= module_classname%>"
