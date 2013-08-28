@@ -8,15 +8,23 @@ require "./apps/api"
 # The Procfile and Guardfile are configured to
 # to do auto-reloading of SASS, CoffeeScript,
 # CSS, JavaScript, and HTML files.
-#
-# This makes it really nice to do rapid prototyping.
-#
-# if Sparks.development?
-#   require 'rack-livereload'
-#   use Rack::LiveReload
-# end
 
 app = Rack::Builder.new do
+  map "/assets" do
+    environment = Sprockets::Environment.new
+
+    %w{javascripts stylesheets images templates fonts}.each do |path|
+      environment.append_path "./assets/#{path}"
+      environment.append_path "./vendor/assets/#{path}"
+    end
+
+    run environment
+  end
+
+  # Removed the LiveReload when you go to production
+  use Rack::LiveReload
+  use Rack::MethodOverride
+
   map "/" do
     run <%= module_classname %>::Api.new
   end

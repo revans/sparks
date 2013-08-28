@@ -89,8 +89,8 @@ module Sparks
          apps/api.rb.erb
          config/application.rb.erb
          config/db.yml.erb
-         assets/javascripts/application.coffee
-         assets/stylesheets/application.scss
+         assets/javascripts/application.js.coffee
+         assets/stylesheets/application.css.scss
          public/humans.txt
          public/robots.txt
          lib/tasks/assets.rake
