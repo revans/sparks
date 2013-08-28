@@ -1,7 +1,7 @@
 require "./config/application"
-require "./app/api"
+require "./apps/api"
 
-# If you want to do AutoLoading of Files, when
+# If you want to do Auto-Loading of Files, when
 # those files change using Guard and Livereload,
 # then uncomment below.
 #
@@ -16,4 +16,10 @@ require "./app/api"
 #   use Rack::LiveReload
 # end
 
-run <%= module_classname %>::Api.run!
+app = Rack::Builder.new do
+  map "/" do
+    run <%= module_classname %>::Api.new
+  end
+end
+
+run app

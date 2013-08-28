@@ -22,13 +22,11 @@ module <%= @appname.capitalize %>
       app.configure do
         app.set :root,              Sparks.root
         app.set :public_folder,     Sparks.public_file
-        app.set :views,             Sparks.view_files
         app.set :show_exceptions,   false
         app.set :connections,       []
         # app.set :server,            'thin'
 
         # app.mime_type :plain, 'text/plain'
-        # app.enable :sessions, :logging, :dump_errors, :raise_errors
       end
 
       ## Environment Specific Configuration

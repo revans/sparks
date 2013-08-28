@@ -1,10 +1,10 @@
-guard 'sass',         input: 'app/assets/stylesheets',    output: 'public/stylesheets'
-guard 'coffeescript', input: 'app/assets/coffeescripts',  output: 'public/javascripts'
+guard 'sass',         input: 'apps/assets/stylesheets',    output: 'public/stylesheets'
+guard 'coffeescript', input: 'apps/assets/coffeescripts',  output: 'public/javascripts'
 
 guard 'livereload' do
-  watch("app/app.rb")
-  watch(%r{app/views/.+\.(erb|haml|slim)})
-  watch(%r{app/helpers/.+\.rb})
+  watch("apps/api.rb")
+  watch(%r{apps/views/.+\.(erb|haml|slim)})
+  watch(%r{apps/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
   # watch(%r{config/locales/.+\.yml})
 end

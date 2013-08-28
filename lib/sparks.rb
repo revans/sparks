@@ -75,7 +75,6 @@ module Sparks
   #   for that is that those files live within the app/ directory.
   #
   def app_logic
-    # root.join("app/**/**/*.rb")
     app_path.join("**/**/*.rb")
   end
 

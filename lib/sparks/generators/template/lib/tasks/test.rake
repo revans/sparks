@@ -15,7 +15,7 @@ namespace :test do
   desc "Sets the environment to 'test' for running tests"
   task :environment do
     Sparks.env  = 'test'
-    DB          = Sparks.db_connect!
+    DB          = Sparks::DB::Credentials.connect!(Sparks.load_database_config)
   end
 
   desc "Prepare the test database for running tests"
