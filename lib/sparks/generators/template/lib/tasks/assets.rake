@@ -10,18 +10,18 @@ namespace :assets do
   namespace :install do
     desc "Install bourbon"
     task :bourbon do
-      `bourbon install --path apps/assets/stylesheets`
+      `bourbon install --path assets/stylesheets`
     end
 
     desc "Install bouron neat"
     task :neat do
       `neat install`
-      `mv neat apps/assets/stylesheets`
+      `mv neat assets/stylesheets`
     end
 
     desc "Generate Grid Settings Stylesheet"
     task :grid_settings do
-      `touch apps/assets/stylesheets/grid-settings.scss`
+      `touch assets/stylesheets/grid-settings.scss`
     end
   end
 end

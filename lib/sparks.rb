@@ -2,10 +2,15 @@ require 'pathname'
 require 'json'
 require 'yaml'
 
+require_relative "sparks/caller"
 require_relative "sparks/env"
 require_relative "sparks/db/credentials"
 require_relative "sparks/generators"
 require_relative "sparks/version"
+
+SPARKS_ROOT = ENV["SPARKS_ROOT"] ||= File.dirname(
+  Sparks.first_caller
+) unless defined?(SPARKS_ROOT)
 
 ## TODO: Possibly add these:
 #
@@ -33,7 +38,7 @@ module Sparks
   # Returns the path to the root directory
   #
   def root
-    ::Pathname.new(__dir__).join("../..").expand_path
+    ::Pathname.new(SPARKS_ROOT).expand_path
   end
 
   # Path to where the application logic exists
@@ -48,23 +53,12 @@ module Sparks
     public_path.to_s
   end
 
-  # Returns the path to the view files
-  #
-  def view_files
-    view_path.to_s
-  end
-
   # Public Path
   #
   def public_path
     root.join("public")
   end
 
-  # View Path
-  #
-  def view_path
-    app_path.join("views")
-  end
 
   # Returns an array to all the application logic files (user created)
   #
@@ -103,7 +97,7 @@ module Sparks
   # Path to the user set assets
   #
   def assets_path
-    app_path.join("assets")
+    root.join("assets")
   end
 
   # Path to the vendored 3rd party assets
@@ -162,3 +156,4 @@ end
 # apps/api/views
 # apps/registration/app.rb
 # apps/registration/views
+

@@ -14,7 +14,7 @@ require 'rack/test'
 require "./config/application"
 
 # Applications
-require "./app/api"
+require "./apps/api"
 
 # Include the Rack Test Methods within
 # Minitest.

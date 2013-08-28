@@ -5,12 +5,12 @@ def set_env_to(env)
 end
 
 class SparksTest < Minitest::Test
-  def mocked_root
-    ::File.expand_path("../../", __dir__)
+  def mocked_root(arg = '')
+    ::Pathname.new(__dir__).expand_path.join(arg).to_s
   end
 
   def app_logic
-    mocked_root + "/apps/**/**/*.rb"
+    mocked_root("apps/**/**/*.rb")
   end
 
   def test_root
@@ -65,20 +65,20 @@ class SparksTest < Minitest::Test
     assert_equal path, Sparks.public_path.to_s
   end
 
-  def test_view_files
-    path = mocked_root + "/apps/views"
-    assert_equal path, Sparks.view_files
-  end
-
-  def test_view_path
-    path = mocked_root + "/apps/views"
-    assert_equal path, Sparks.view_path.to_s
-  end
-
   def test_build
     dirs = Sparks.build
 
     # assert_match "app/api.rb",      dirs.first
     assert_match "apps/**/**/*.rb",  dirs.last
+  end
+
+  def test_assets_path
+    path = mocked_root + "/assets"
+    assert_equal path, Sparks.assets_path.to_s
+  end
+
+  def test_vendor_assets_path
+    path = mocked_root + "/vendor/assets"
+    assert_equal path, Sparks.vendor_assets_path.to_s
   end
 end

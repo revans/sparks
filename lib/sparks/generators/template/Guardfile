@@ -1,5 +1,5 @@
-guard 'sass',         input: 'apps/assets/stylesheets',    output: 'public/stylesheets'
-guard 'coffeescript', input: 'apps/assets/coffeescripts',  output: 'public/javascripts'
+guard 'sass',         input: 'assets/stylesheets',    output: 'public/stylesheets'
+guard 'coffeescript', input: 'assets/coffeescripts',  output: 'public/javascripts'
 
 guard 'livereload' do
   watch("apps/api.rb")

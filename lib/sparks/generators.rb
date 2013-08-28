@@ -48,11 +48,11 @@ module Sparks
     def create_directories
       %w|apps/views
          apps/helpers
-         apps/assets/javascripts
-         apps/assets/stylesheets
-         apps/assets/images
-         apps/assets/fonts
-         apps/assets/templates
+         assets/javascripts
+         assets/stylesheets
+         assets/images
+         assets/fonts
+         assets/templates
          config
          db
          doc
@@ -80,7 +80,8 @@ module Sparks
     def write_files
       %w|Gemfile
          Guardfile
-         Procfile
+         Procfile.production
+         Procfile.development
          Rakefile
          config.ru.erb
          .env
@@ -88,8 +89,8 @@ module Sparks
          apps/api.rb.erb
          config/application.rb.erb
          config/db.yml.erb
-         apps/assets/javascripts/application.coffee
-         apps/assets/stylesheets/application.scss
+         assets/javascripts/application.coffee
+         assets/stylesheets/application.scss
          public/humans.txt
          public/robots.txt
          lib/tasks/assets.rake
