@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version       = Sparks.version
   gem.authors       = ["Robert Evans"]
   gem.email         = ["robert@codewranglers.org"]
-  gem.description   = "A lightweight framework on top of Sinatra. Can be used for applications as well as rapid prototyping."
+  gem.description   = "A lightweight framework on top of Sinatra. Can be used for applications as well as for rapid prototyping."
   gem.summary       = "A lightweight framework on top of Sinatra."
   gem.homepage      = "http://www.codewranglers.org"
   gem.license       = "MIT"
