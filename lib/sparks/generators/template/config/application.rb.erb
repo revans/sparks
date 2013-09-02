@@ -32,8 +32,7 @@ module <%= @appname.capitalize %>
       ## Environment Specific Configuration
       #
       app.configure :development do
-        # app.enable :sessions, :logging, :dump_errors, :raise_errors
-        app.enable :show_exceptions
+        app.enable :sessions, :logging, :dump_errors, :raise_errors, :show_exceptions
       end
 
       # app.configure :test         do; end

@@ -4,7 +4,6 @@ gem 'sinatra'
 gem "rack"
 gem 'rake'
 
-gem 'thin'
 gem 'foreman'
 gem 'sparks', github: "revans/sparks", branch: "master"
 
@@ -13,7 +12,8 @@ gem 'sparks', github: "revans/sparks", branch: "master"
 
 
 group :production do
-  gem 'sequel_pg'
+  gem 'sequel_pg', require: 'sequel'
+  gem 'thin'
 end
 
 group :development do
@@ -40,7 +40,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'pry'
 end
 
