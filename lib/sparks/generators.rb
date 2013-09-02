@@ -40,6 +40,11 @@ module Sparks
       gitkeep_empty_dirs
       write_files
       copy_files
+      completion_message
+    end
+
+    def completion_message
+      $stderr.puts "--> #{module_classname} has been built."
     end
 
     # TODO: All the "apps" stuff will need to be moved to a new
