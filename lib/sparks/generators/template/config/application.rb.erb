@@ -1,7 +1,7 @@
 $stdout.sync = true
 
 ENV["RACK_ENV"]     ||= "development"
-ENV['SPARKS_ROOT']  || = File.join(__dir__, '..').expand_path
+ENV['SPARKS_ROOT']  ||= File.join(__dir__, '..')
 
 require 'pathname'
 require 'logger'
