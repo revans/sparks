@@ -4,7 +4,7 @@
 # default configuration.
 #
 module <%= @appname.capitalize %>
-  module Api < ::Sinatra::Base
+  class Api < ::Sinatra::Base
     include Configuration
 
     # Before Filter for handling HTTP Cache-Control
