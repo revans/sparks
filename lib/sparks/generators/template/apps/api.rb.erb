@@ -1,10 +1,6 @@
 
 module <%= module_classname %>
   class Api < Sinatra::Base
-    include Configuration
-
-    # Views should be set on a per application basis
-    set :views, "./apps/views"
 
     get "/" do
       "Hello <%= module_classname%>"

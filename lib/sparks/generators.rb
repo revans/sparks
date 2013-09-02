@@ -45,7 +45,7 @@ module Sparks
     end
 
     def completion_message
-      $stderr.puts "--> #{module_classname} has been built."
+      $stderr.puts "\n--> #{module_classname} has been built.\n"
     end
 
     # TODO: All the "apps" stuff will need to be moved to a new
@@ -59,7 +59,7 @@ module Sparks
          assets/images
          assets/fonts
          assets/templates
-         config
+         config/applications
          db
          doc
          lib/tasks
@@ -95,6 +95,7 @@ module Sparks
          apps/api.rb.erb
          config/application.rb.erb
          config/db.yml.erb
+         config/applications/api.rb.erb
          assets/javascripts/application.js.coffee
          assets/stylesheets/application.css.scss
          public/humans.txt

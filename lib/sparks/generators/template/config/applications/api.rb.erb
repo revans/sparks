@@ -1,0 +1,69 @@
+# App specific configuration
+#
+# includes the default configuration giving the ability to override the
+# default configuration.
+#
+module <%= @appname.capitalize %>
+  module Api < ::Sinatra::Base
+    include Configuration
+
+    # Before Filter for handling HTTP Cache-Control
+    # before do
+    #   cache_control :public, :must_revalidate, max_age: 60
+    #   expires 500,  :public, :must_revalidate
+    # end
+
+    # configure do
+    #   set :root,          ""
+    #   set :views,         ""
+    #   set :public_folder, ""
+    #   set :server,        ""
+    #   set :connections,   []
+    #
+    #   mime_type :plain, 'text/plain'
+    # end
+
+    ## Environment Specific Configuration
+    #
+    # configure :development do
+    #   enable :sessions, :logging, :dump_errors, :raise_errors, :show_exceptions
+    # end
+
+    # configure :test         do; end
+    # configure :staging      do; end
+
+    # configure :production do
+    #   require 'rack/cache'
+    #   use Rack::Cache
+    # end
+
+    # 404 Error Handling
+    # not_found do
+      # do something, return a 404 page
+    # end
+
+    # Application Error Handling
+    #
+    # Can also do:
+    #
+    #   * error 405...510 do;end
+    #
+    # error do
+      # Log an Error to a File or STDOUT/STDERR
+      # "Sorry there was a nasty error - #{env['sinatra.error'].name}"
+    # end
+
+    # connection to sql
+    # DB, Sequel::Model.db = Sparks::DB::Credentials.connect!(Sparks.load_database_config)
+
+    # Load Sequel plugins
+    # Sequel::Model.plugin :touch # defaults to updated_at
+
+    # Sequel Extensions
+    # Sequel.extension :migration, :core_extensions, :inflector
+
+    # Sequel Settings
+    # Sequel.application_timezone = :utc
+    # Sequel.database_timezone    = :utc
+  end
+end
