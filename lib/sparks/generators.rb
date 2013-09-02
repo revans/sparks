@@ -80,7 +80,7 @@ module Sparks
     def write_files
       %w|Gemfile
          Guardfile
-         Procfile.production
+         Procfile
          Procfile.development
          Rakefile
          config.ru.erb
