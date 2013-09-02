@@ -49,6 +49,8 @@ end
 
 # module MySinatraApplication
 #   class ApiTest < Minitest::Test
+#     include BuilderHelper
+#
 #     def app
 #       builder do
 #         route_to "/api/v1", Api
