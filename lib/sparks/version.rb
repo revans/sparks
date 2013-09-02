@@ -9,5 +9,5 @@ module Sparks
 
   MAJOR = 0
   MINOR = 0
-  PATCH = 12
+  PATCH = 13
 end
