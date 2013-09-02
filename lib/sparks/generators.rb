@@ -41,6 +41,7 @@ module Sparks
       write_files
       copy_files
       completion_message
+      true
     end
 
     def completion_message

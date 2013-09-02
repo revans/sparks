@@ -2,15 +2,15 @@ require 'pathname'
 require 'json'
 require 'yaml'
 
-require_relative "sparks/caller"
+# require_relative "sparks/caller"
 require_relative "sparks/env"
 require_relative "sparks/db/credentials"
 require_relative "sparks/generators"
 require_relative "sparks/version"
 
-SPARKS_ROOT = ENV["SPARKS_ROOT"] ||= File.dirname(
-  Sparks.first_caller
-) unless defined?(SPARKS_ROOT)
+# SPARKS_ROOT = ENV["SPARKS_ROOT"] ||= File.dirname(
+#   Sparks.first_caller
+# ) unless defined?(SPARKS_ROOT)
 
 ## TODO: Possibly add these:
 #
@@ -38,7 +38,7 @@ module Sparks
   # Returns the path to the root directory
   #
   def root
-    ::Pathname.new(SPARKS_ROOT).expand_path
+    ::Pathname.new(ENV['SPARKS_ROOT']).expand_path
   end
 
   # Path to where the application logic exists

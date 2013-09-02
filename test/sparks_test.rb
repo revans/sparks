@@ -4,7 +4,15 @@ def set_env_to(env)
   ENV['RACK_ENV'] = env
 end
 
+def set_root_to(path)
+  ENV["SPARKS_ROOT"] = path
+end
+
 class SparksTest < Minitest::Test
+  def setup
+    set_root_to(::Pathname.new(__dir__).expand_path.to_s)
+  end
+
   def mocked_root(arg = '')
     ::Pathname.new(__dir__).expand_path.join(arg).to_s
   end

@@ -2,6 +2,8 @@ require "test_helper"
 require 'tmpdir'
 
 class GeneratorsTest < Minitest::Test
+  include TestHelper
+
   def temp(&block)
     appname = 'zues'
     Dir.mktmpdir do |tmp|
@@ -41,8 +43,10 @@ class GeneratorsTest < Minitest::Test
       assert_equal expected_app_path,       generator.app_root.to_s
       assert_equal expected_template_path,  generator.template_root.to_s
 
-      # assert gen.build
-      assert generator.app
+      silence_stdout do
+        assert generator.app
+      end
+
       path = generator.app_root
 
       # goes through the array checking to make sure each file

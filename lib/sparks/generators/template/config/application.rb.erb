@@ -1,12 +1,15 @@
 $stdout.sync = true
 
-ENV["RACK_ENV"] ||= "development"
+ENV["RACK_ENV"]     ||= "development"
+ENV['SPARKS_ROOT']  || = File.join(__dir__, '..').expand_path
+
 require 'pathname'
 require 'logger'
 require 'yaml'
 
 require 'bundler'
 Bundler.require(:default, ENV["RACK_ENV"])
+
 
 module <%= @appname.capitalize %>
   module Configuration
