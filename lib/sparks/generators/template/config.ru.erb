@@ -14,10 +14,32 @@ app = Rack::Builder.new do
   map "/assets" do
     environment = Sprockets::Environment.new
 
+    # Let Sprockets know about the ./assets directory and the ./vendor/assets
+    # directory so it can load javascript/stylesheet/template files from there.
+    #
     %w{javascripts stylesheets images templates fonts}.each do |path|
       environment.append_path "./assets/#{path}"
       environment.append_path "./vendor/assets/#{path}"
     end
+
+    # When using Bower
+    #
+    # ==== Example
+    #
+    # If you installed jquery (bower install --save jquery) it'll be installed
+    # in the +bower_components+ directory under: jquery/jquery.min.js
+    #
+    # In your assets/stylesheets/application.css.scss file you'd:
+    #
+    #   #= require jquery/jquery.min
+    #
+    # In your stylesheets, using normalize-css as an example:
+    #
+    #   *= normalize-css/normalize
+    #
+    # uncomment below to add the bower_components path to Sprockets
+    #
+    # environment.append_path "./bower_components"
 
     run environment
   end
